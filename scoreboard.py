@@ -8,9 +8,13 @@ class ScoreBoard(Turtle):
         self.score = 0
         self.high_score = 0
 
-        with open("scoreboard.txt") as file:
-            contents = int(file.read())
-            print(f"high score is: {contents}")
+        try:
+            with open("scoreboard.txt") as file:
+                contents = int(file.read())
+                print(f"high score is: {contents}")
+        except FileNotFoundError:
+            with open("scoreboard.txt", "w") as file:
+                file.write("0")
 
         self.penup()
         self.hideturtle()
@@ -27,7 +31,7 @@ class ScoreBoard(Turtle):
         self.clear()
         self.refresh()
 
-    def increase_score(self):
+    def current_score_increase(self):
         self.score += 1
         self.refresh()
 
